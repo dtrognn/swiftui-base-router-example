@@ -21,7 +21,7 @@ public enum NavigationType {
 
  Also, it can be created outside of a `DGNavigationStackView` hierarchy and injected manually into it during the `DGNavigationStackView` initialization process.
 */
-public class DGNavigationPath: ObservableObject {
+public class NavigationPath: ObservableObject {
 
     /// The default easing function for push and pop transitions.
     /// - Tag: defaultEasing
