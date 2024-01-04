@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct SplashSreenView: View {
+struct SplashScreenView: View {
+    @EnvironmentObject private var router: AppRouter
+    
     var body: some View {
         ZStack {
             Color.cyan.opacity(0.3)
@@ -16,9 +18,14 @@ struct SplashSreenView: View {
                 Text("Splash screen")
             }
         }.ignoresSafeArea()
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    router.push(to: .mainTab)
+                }
+            }
     }
 }
 
 #Preview {
-    SplashSreenView()
+    SplashScreenView()
 }
