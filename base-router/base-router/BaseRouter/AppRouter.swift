@@ -8,21 +8,45 @@
 import SwiftUI
 
 class AppRouter: BaseRouter<AppRouter.Screen> {
-    enum Screen: IScreen {}
+    enum Screen: IScreen {
+        case appLaunch
+        case mainTab
+    }
 
-    override func getInstanceScreen(_ screen: Screen) -> AnyView {}
+    @Published var screen: Screen = .appLaunch
+
+    override init() {
+        super.init()
+        self.screen = .appLaunch
+    }
+
+    deinit {
+        print("deinit:\(#file)")
+    }
+
+    private func updateScreen(isLogin: Bool) {
+        if isLogin == true {
+            self.screen = .mainTab
+        }
+        popToRootView()
+    }
+
+    override func getInstanceScreen(_ screen: Screen) -> AnyView {
+        switch screen {
+        case .appLaunch:
+            return SplashScreenView().asAnyView
+        case .mainTab:
+            return TabbarRouterView().asAnyView
+        }
+    }
 }
 
 struct AppRouterView: View {
     @StateObject var router: AppRouter = .init()
 
-    init(router: AppRouter = .init()) {
-        _router = StateObject(wrappedValue: router)
-    }
-
     var body: some View {
-        DGNavigationStackView(navigationPath: router.navigationPath) {
-            TabbarRouterView()
-        }.environmentObject(router)
+        DGNavigationStackView(navigationPath: self.router.navigationPath) {
+            self.router.getInstanceScreen(self.router.screen)
+        }.environmentObject(self.router)
     }
 }
