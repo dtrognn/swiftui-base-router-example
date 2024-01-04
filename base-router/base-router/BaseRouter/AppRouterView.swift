@@ -22,7 +22,7 @@ struct AppRouterView: View {
 
     var body: some View {
         DGNavigationStackView(navigationPath: router.navigationPath) {
-            ContentView()
+            TabbarRouterView()
         }.environmentObject(router)
     }
 }
