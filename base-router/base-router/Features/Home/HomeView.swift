@@ -8,8 +8,25 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    private var screenConfiguration: ScreenConfiguration {
+        return ScreenConfiguration(
+            title: "",
+            showBackButton: false,
+            showNavibar: false,
+            hidesBottomBarWhenPushed: false
+        )
+    }
+    
     var body: some View {
-        Text("Home View")
+        ScreenContainerView(screenConfiguration) {
+            VStack {
+                ForEach(1 ..< 10, id: \.self) { index in
+                    Rectangle()
+                }
+            }.padding(AppStyle.layout.standardSpace)
+                .cornerRadius(AppStyle.layout.standardCornerRadius)
+        }
     }
 }
 
