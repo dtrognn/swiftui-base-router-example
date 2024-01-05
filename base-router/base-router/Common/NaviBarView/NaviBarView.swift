@@ -49,7 +49,9 @@ extension NaviBarView {
                 self.navigationStack.pop()
             }
         } label: {
-            Image(systemName: "arrow.backward")
+            Image("ic_arrow_left")
+                .resizable()
+                .frame(width: 22, height: 22)
         }
     }
 
