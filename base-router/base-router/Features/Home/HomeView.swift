@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject private var router: HomeRouter
     
     private var screenConfiguration: ScreenConfiguration {
         return ScreenConfiguration(
@@ -17,15 +18,61 @@ struct HomeView: View {
             hidesBottomBarWhenPushed: false
         )
     }
-    
+
     var body: some View {
         ScreenContainerView(screenConfiguration) {
-            VStack {
-                ForEach(1 ..< 10, id: \.self) { index in
-                    Rectangle()
+            VStack(spacing: AppStyle.layout.zero) {
+                CommonButtonView(text: "Next screen") {
+                    router.push(to: .screen1)
                 }
-            }.padding(AppStyle.layout.standardSpace)
-                .cornerRadius(AppStyle.layout.standardCornerRadius)
+            }.padding(.bottom, AppStyle.layout.standardButtonHeight)
+                .padding([.horizontal, .top], AppStyle.layout.standardSpace)
+        }
+    }
+}
+
+struct Screen1: View {
+    @EnvironmentObject private var router: HomeRouter
+    
+    private var screenConfiguration: ScreenConfiguration {
+        return ScreenConfiguration(
+            title: "Screen 1",
+            showBackButton: true,
+            showNavibar: true,
+            hidesBottomBarWhenPushed: true
+        )
+    }
+
+    var body: some View {
+        ScreenContainerView(screenConfiguration) {
+            VStack(spacing: AppStyle.layout.zero) {
+                CommonButtonView(text: "Screen 2") {
+                    router.push(to: .screen2)
+                }
+            }.padding([.horizontal, .top], AppStyle.layout.standardSpace)
+        }
+    }
+}
+
+struct Screen2: View {
+    @EnvironmentObject private var router: HomeRouter
+    
+    private var screenConfiguration: ScreenConfiguration {
+        return ScreenConfiguration(
+            title: "Screen 2",
+            showBackButton: true,
+            showNavibar: true,
+            hidesBottomBarWhenPushed: true
+        )
+    }
+
+    var body: some View {
+        ScreenContainerView(screenConfiguration) {
+            VStack(spacing: AppStyle.layout.zero) {
+                CommonButtonView(text: "Pop to root view") {
+                    router.popToRootView()
+                }
+            }.padding([.horizontal, .top], AppStyle.layout.standardSpace)
         }
     }
 }
