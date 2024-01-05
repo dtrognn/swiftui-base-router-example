@@ -8,9 +8,16 @@
 import SwiftUI
 
 class ProfileInfoRouter: BaseRouter<ProfileInfoRouter.Screen> {
-    enum Screen: IScreen {}
+    enum Screen: IScreen {
+        case editProfile
+    }
 
-    override func getInstanceScreen(_ screen: Screen) -> AnyView {}
+    override func getInstanceScreen(_ screen: Screen) -> AnyView {
+        switch screen {
+        case .editProfile:
+            return EditProfileView().environmentObject(self).asAnyView
+        }
+    }
 }
 
 struct ProfileInfoRouterView: View {

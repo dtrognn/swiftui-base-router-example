@@ -1,5 +1,5 @@
 //
-//  ProfileInfoView.swift
+//  EditProfileView.swift
 //  base-router
 //
 //  Created by dtrognn on 05/01/2024.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct ProfileInfoView: View {
+struct EditProfileView: View {
     @EnvironmentObject private var router: ProfileInfoRouter
     
     private var screenConfiguration: ScreenConfiguration {
         return ScreenConfiguration(
-            title: "ProfileInfo",
+            title: "Edit profile",
             showBackButton: true,
             showNavibar: true,
             hidesBottomBarWhenPushed: true
@@ -22,8 +22,8 @@ struct ProfileInfoView: View {
     var body: some View {
         ScreenContainerView(screenConfiguration) {
             VStack {
-                CommonButtonView(text: "Edit profile") {
-                    router.push(to: .editProfile)
+                CommonButtonView(text: "Pop to root view") {
+                    router.popToRootView()
                 }
             }.padding(.all, AppStyle.layout.standardSpace)
         }
@@ -31,5 +31,5 @@ struct ProfileInfoView: View {
 }
 
 #Preview {
-    ProfileInfoView()
+    EditProfileView()
 }
