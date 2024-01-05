@@ -8,9 +8,20 @@
 import SwiftUI
 
 class ProfileRouter: BaseRouter<ProfileRouter.Screen> {
-    enum Screen: IScreen {}
+    enum Screen: IScreen {
+        case profileInfo
+        case setting
+    }
 
-    override func getInstanceScreen(_ screen: Screen) -> AnyView {}
+    override func getInstanceScreen(_ screen: Screen) -> AnyView {
+        switch screen {
+        case .profileInfo:
+            let router = ProfileInfoRouter(navigationPath: navigationPath)
+            return ProfileInfoRouterView(router: router).asAnyView
+        case .setting:
+            return SettingView().asAnyView
+        }
+    }
 }
 
 struct ProfileRouterView: View {
